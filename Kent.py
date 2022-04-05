@@ -62,7 +62,7 @@ class MainCog(commands.Cog):
         #self.sync.start()
         #self.money.start()
 
-    @tasks.loop(seconds=60)
+    """@tasks.loop(seconds=60)
     async def sync(self):
         guild = await self.bot.fetch_guild(905228207031197817)
 
@@ -98,7 +98,7 @@ class MainCog(commands.Cog):
             content = None,
             embed = embedVar,
             components=None
-        )
+        )"""
 
 
     @commands.command()
@@ -114,7 +114,7 @@ class MainCog(commands.Cog):
 
                     for i in ctx.author.roles:
 
-                        if i.name.lower() == 'Kent domym':
+                        if i.name.lower() == 'Kent dommy':
 
                             temp = True
 
