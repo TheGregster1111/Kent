@@ -245,7 +245,7 @@ class MainCog(commands.Cog):
                     if member.name == match[1]:
                         print(member.id)
                         await member.create_dm()
-                        await member.send(message.content[len(match[0]):])
+                        await member.send('Anonymous message: ' + message.content[len(match[0]):])
 
                         return
 
