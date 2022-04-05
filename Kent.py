@@ -59,8 +59,8 @@ class MainCog(commands.Cog):
         print(os.getcwd())
         os.chdir('Users')
 
-        self.sync.start()
-        self.money.start()
+        #self.sync.start()
+        #self.money.start()
 
     @tasks.loop(seconds=60)
     async def sync(self):
@@ -233,7 +233,26 @@ class MainCog(commands.Cog):
 
                         open(file, 'w').write(values[0] + ' ' + values[1])"""
 
+    @commands.Cog.listener()
+    async def on_message(self, message):
+        print(message.content)
+        if re.match(r'.+?#\d{4} (.*?)', message.content):
+            
+            match = re.match(r'(.+?)#\d{4} (.*?)', message.content)
+
+            for member in self.bot.get_all_members():
+                if not member.bot:
+                    if member.name == match[1]:
+                        print(member.id)
+                        await member.create_dm()
+                        await member.send(message.content[len(match[0]):])
+
+                        return
+
+            await message.reply('Could not send message')
+
     
 
 def setup(bot):
     bot.add_cog(MainCog(bot))
+
