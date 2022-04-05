@@ -235,7 +235,6 @@ class MainCog(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        print(message.content)
         if re.match(r'.+?#\d{4} (.*?)', message.content):
             
             match = re.match(r'(.+?)#\d{4} (.*?)', message.content)
@@ -243,7 +242,6 @@ class MainCog(commands.Cog):
             for member in self.bot.get_all_members():
                 if not member.bot:
                     if member.name == match[1]:
-                        print(member.id)
                         await member.create_dm()
                         await member.send('Anonymous message: ' + message.content[len(match[0]):])
 
