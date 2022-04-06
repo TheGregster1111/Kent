@@ -46,7 +46,7 @@ class MainCog(commands.Cog):
             pass
 
         try:
-            os.chdir('home/pi/Kent')
+            os.chdir('home/bots/bot/Kent')
 
             for filename in os.listdir(os.path.dirname(__file__) + '/Kent_Cogs'):
 
@@ -180,6 +180,17 @@ class MainCog(commands.Cog):
                     pass
 
                 await ctx.message.delete()
+
+    @commands.command()
+    async def anonymous(self, ctx):
+        try:
+            reportChannel = await self.bot.fetch_channel(961216767953367091)
+            
+            await reportChannel.send(ctx.message.content[12:])
+        except:
+            print('Cannot find anonymous channel')
+            pass
+
 
     """@commands.command()
     async def buy(self, ctx):
