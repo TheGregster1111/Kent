@@ -11,7 +11,6 @@ from discord.ext import commands, tasks
 from discord_components import Button, ButtonStyle, ComponentsBot
 import os
 import random
-import urllib.request
 import re
 import pafy
 import datetime
@@ -19,6 +18,10 @@ import spotipy
 from spotipy import SpotifyClientCredentials
 from threading import Thread
 import emoji
+import random
+import urllib
+from urllib import parse, request
+import json
 
 #regex dictionary
 #(.*?)    match unspecified length of characters
@@ -190,6 +193,28 @@ class MainCog(commands.Cog):
         except:
             print('Cannot find anonymous channel')
             pass
+
+    @commands.command()
+    async def raccoon(self, ctx):
+        #random.randint(1, 2) == 1
+        if True:
+            url = "http://api.giphy.com/v1/gifs/search"
+
+            params = parse.urlencode({
+            "q": "raccoon",
+            "api_key": "YOg3zU2FQZNJ3R3rUKEPLVBlg0h3Yfr5",
+            "limit": "50"
+            })
+
+            with request.urlopen("".join((url, "?", params))) as response:
+                data = json.loads(response.read())
+
+            gifs = []
+
+            for i in data['data']:
+                gifs.append(i['embed_url'])
+
+            await ctx.message.reply(gifs[random.randint(0, 49)])
 
 
     """@commands.command()
