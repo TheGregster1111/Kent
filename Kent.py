@@ -22,6 +22,9 @@ import random
 import urllib
 from urllib import parse, request
 import json
+from bs4 import BeautifulSoup
+import xml
+import wikipedia
 
 #regex dictionary
 #(.*?)    match unspecified length of characters
@@ -232,6 +235,22 @@ class MainCog(commands.Cog):
 
             await ctx.message.reply(gifs[random.randint(0, 49)])
 
+    @commands.command()
+    async def wikipediasearch(self, ctx):
+
+        searchterm = ctx.message.content[18:]
+
+        if searchterm is None:
+            await ctx.message.reply('Please enter a searchterm')
+            return
+        
+        page = wikipedia.page(wikipedia.search(searchterm)[0])
+
+        embedvar = embedVar = discord.Embed(title=page.title, color=0x0e41b5)
+
+        embedVar.description = page.summary
+
+        await ctx.reply(embed=embedvar)
 
     """@commands.command()
     async def buy(self, ctx):
