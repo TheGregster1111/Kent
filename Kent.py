@@ -196,8 +196,7 @@ class MainCog(commands.Cog):
 
     @commands.command()
     async def raccoon(self, ctx):
-        #random.randint(1, 2) == 1
-        if True:
+        if random.randint(1, 2) == 1:
             url = "http://api.giphy.com/v1/gifs/search"
 
             params = parse.urlencode({
@@ -213,6 +212,26 @@ class MainCog(commands.Cog):
 
             for i in data['data']:
                 gifs.append(i['embed_url'])
+
+            await ctx.message.reply(gifs[random.randint(0, 49)])
+
+        else:
+            
+            apikey = "QAA1HOZHDDLS"
+            lmt = 50
+            search_term = "raccoon"
+            
+            with request.urlopen("https://g.tenor.com/v1/search?q={}&key={}&limit={}".format(search_term, apikey, lmt)) as response:
+                data = json.loads(response.read())
+
+            with open('temptest.txt', 'w') as outfile:
+                json.dump(data['results'], outfile, indent=4)
+
+            gifs = []
+
+            for i in data['results']:
+                for j in i['media']:
+                    gifs.append(j['gif']['url'])
 
             await ctx.message.reply(gifs[random.randint(0, 49)])
 
