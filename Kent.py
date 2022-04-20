@@ -224,9 +224,6 @@ class MainCog(commands.Cog):
             with request.urlopen("https://g.tenor.com/v1/search?q={}&key={}&limit={}".format(search_term, apikey, lmt)) as response:
                 data = json.loads(response.read())
 
-            with open('temptest.txt', 'w') as outfile:
-                json.dump(data['results'], outfile, indent=4)
-
             gifs = []
 
             for i in data['results']:
